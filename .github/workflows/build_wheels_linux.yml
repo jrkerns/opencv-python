@@ -165,5 +165,5 @@ jobs:
     - name: saving artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: wheels
+        name: wheel-${{ matrix.with_contrib }}-${{ matrix.without_gui }}-${{ matrix.build_sdist }}
         path: dist/opencv*.tar.gz
