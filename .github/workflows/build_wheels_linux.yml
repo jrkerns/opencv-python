@@ -27,7 +27,7 @@ jobs:
       MB_ML_VER: 2014
       TRAVIS_BUILD_DIR: ${{ github.workspace }}
       CONFIG_PATH: travis_config.sh
-      DOCKER_IMAGE: quay.io/opencv-ci/opencv-python-manylinux2014-x86-64:20241202
+      DOCKER_IMAGE: quay.io/opencv-ci/opencv-python-manylinux2014-x86-64
       USE_CCACHE: 0
       UNICODE_WIDTH: 32
       PLAT: x86_64
@@ -91,7 +91,7 @@ jobs:
     - name: Download a wheel accordingly to matrix
       uses: actions/download-artifact@v4
       with:
-        name: wheel-${{ matrix.with_contrib }}-${{ matrix.without_gui }}-${{ matrix.build_sdist }}
+        name: wheel-contrib-${{ matrix.with_contrib }}-nogui-${{ matrix.without_gui }}-sdist-${{ matrix.build_sdist }}
         path: wheelhouse/
     - name: Package installation and run tests
       run: source scripts/install.sh
@@ -120,7 +120,7 @@ jobs:
       NP_TEST_DEP: numpy==1.19.4
       TRAVIS_BUILD_DIR: ${{ github.workspace }}
       CONFIG_PATH: travis_config.sh
-      DOCKER_IMAGE: quay.io/opencv-ci/opencv-python-manylinux2014-x86-64:20241202
+      DOCKER_IMAGE: quay.io/opencv-ci/opencv-python-manylinux2014-x86-64
       USE_CCACHE: 1
       UNICODE_WIDTH: 32
       SDIST: ${{ matrix.build_sdist || 0 }}
@@ -160,5 +160,5 @@ jobs:
     - name: saving artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: sdist-${{ matrix.with_contrib }}-${{ matrix.without_gui }}-${{ matrix.build_sdist }}
+        name: sdist-contrib-${{ matrix.with_contrib }}-no-gui-${{ matrix.without_gui }}-sdist-${{ matrix.build_sdist }}.zip
         path: dist/opencv*.tar.gz
