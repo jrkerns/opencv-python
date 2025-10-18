@@ -34,15 +34,11 @@ jobs:
       SDIST: ${{ matrix.build_sdist || 0 }}
       ENABLE_HEADLESS: ${{ matrix.without_gui }}
       ENABLE_CONTRIB: ${{ matrix.with_contrib }}
+      ENABLE_ROLLING: 0
     steps:
     - name: Cleanup
       run: find . -mindepth 1 -delete
       working-directory: ${{ github.workspace }}
-    - name: Setup environment
-      run: |
-        if [[ "${{ github.event_name }}" == "schedule" || "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-          echo "ENABLE_ROLLING=1" >> $GITHUB_ENV
-        fi
     - name: Checkout
       uses: actions/checkout@v4
       with:
